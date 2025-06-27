@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FFD100'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-size='20' font-weight='bold' fill='%23000'%3EQ%3C/text%3E%3C/svg%3E">
+    <title>Qurylys.kz - Будущее аренды спецтехники</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FFD100;
+            --dark: #000;
+            --light: #fff;
+            --gray: #86868b;
+            --section-padding: 100px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: var(--light);
+            background: var(--dark);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 15px 40px;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 209, 0, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center top, #1a1a1a 0%, #000 100%);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh) translateX(0);
+            }
+            to {
+                transform: translateY(-100px) translateX(100px);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 30px;
+            background: linear-gradient(to right, #fff, #FFD100);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 300;
+            color: var(--gray);
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .hero-button {
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-button-primary {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .hero-button-secondary {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 209, 0, 0.3);
+        }
+
+        .hero-button-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* 3D Equipment Showcase */
+        .equipment-showcase {
+            padding: var(--section-padding) 0;
+            position: relative;
+            background: linear-gradient(to bottom, #000, #0a0a0a);
+        }
+
+        .showcase-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .section-header.visible {
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 20px;
+            color: var(--gray);
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .equipment-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            transition: all 0.6s ease;
+        }
+
+        .equipment-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .equipment-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .equipment-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .equipment-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 209, 0, 0.3);
+            box-shadow: 0 30px 60px rgba(255, 209, 0, 0.2);
+        }
+
+        .equipment-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .equipment-card:hover .equipment-icon {
+            filter: grayscale(0%);
+        }
+
+        .equipment-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .equipment-desc {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .equipment-price {
+            font-size: 20px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: var(--section-padding) 0;
+            background: linear-gradient(to bottom, #0a0a0a, #000);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding: 0 40px;
+        }
+
+        .stat-card {
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .stat-card.visible {
+            animation: scaleIn 0.6s ease forwards;
+        }
+
+        @keyframes scaleIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .stat-number {
+            font-size: clamp(48px, 6vw, 72px);
+            font-weight: 900;
+            background: linear-gradient(to right, var(--primary), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            color: var(--gray);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: var(--section-padding) 0;
+            background: #050505;
+            position: relative;
+        }
+
+        .feature-row {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            padding: 80px 40px;
+        }
+
+        .feature-row:nth-child(even) {
+            direction: rtl;
+        }
+
+        .feature-row:nth-child(even) .feature-content {
+            direction: ltr;
+        }
+
+        .feature-visual {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(255, 209, 0, 0.1), rgba(255, 209, 0, 0.05));
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 200px;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .feature-visual.visible {
+            animation: slideInLeft 1s ease forwards;
+        }
+
+        .feature-row:nth-child(even) .feature-visual {
+            transform: translateX(50px);
+        }
+
+        .feature-row:nth-child(even) .feature-visual.visible {
+            animation: slideInRight 1s ease forwards;
+        }
+
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .feature-content {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .feature-content.visible {
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .feature-title {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .feature-description {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .feature-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: gap 0.3s ease;
+        }
+
+        .feature-link:hover {
+            gap: 15px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 150px 0;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 40px;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .cta-content.visible {
+            animation: scaleIn 1s ease forwards;
+        }
+
+        .cta-title {
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-subtitle {
+            font-size: 20px;
+            color: var(--gray);
+            margin-bottom: 50px;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column a {
+            color: var(--gray);
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            .hero-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .feature-row {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 20px;
+            }
+
+            .feature-row:nth-child(even) {
+                direction: ltr;
+            }
+
+            .feature-visual {
+                height: 300px;
+                font-size: 120px;
+            }
+
+            .equipment-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .section-header {
+                margin-bottom: 40px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .feature-title {
+                font-size: 28px;
+            }
+
+            .cta-title {
+                font-size: 36px;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            animation: pulse 1.5s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--primary);
+            color: var(--dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-text">QURYLYS</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Qurylys</a>
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Главная</a>
+                <a href="#equipment" class="nav-link">Техника</a>
+                <a href="#features" class="nav-link">Преимущества</a>
+                <a href="#contact" class="nav-link">Контакты</a>
+                <button class="cta-button">Арендовать</button>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="particles" id="particles"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Будущее аренды спецтехники</h1>
+            <p class="hero-subtitle">Инновационная платформа для быстрого поиска и аренды строительной техники по всему Казахстану</p>
+            <div class="hero-buttons">
+                <a href="#equipment" class="hero-button hero-button-primary">Найти технику</a>
+                <a href="#" class="hero-button hero-button-secondary">Стать партнером</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipment Showcase -->
+    <section class="equipment-showcase" id="equipment">
+        <div class="showcase-container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Техника нового поколения</h2>
+                <p class="section-subtitle">Современный парк спецтехники для любых задач</p>
+            </div>
+            <div class="equipment-grid">
+                <div class="equipment-card fade-in">
+                    <div class="equipment-icon">🚜</div>
+                    <h3 class="equipment-name">Экскаваторы</h3>
+                    <p class="equipment-desc">Мощные машины для земляных работ любой сложности</p>
+                    <p class="equipment-price">от 12 000 ₸/час</p>
+                </div>
+                <div class="equipment-card fade-in">
+                    <div class="equipment-icon">🏗️</div>
+                    <h3 class="equipment-name">Краны</h3>
+                    <p class="equipment-desc">Подъемная техника для высотных работ</p>
+                    <p class="equipment-price">от 15 000 ₸/час</p>
+                </div>
+                <div class="equipment-card fade-in">
+                    <div class="equipment-icon">🚛</div>
+                    <h3 class="equipment-name">Самосвалы</h3>
+                    <p class="equipment-desc">Надежный транспорт для перевозки грузов</p>
+                    <p class="equipment-price">от 8 000 ₸/час</p>
+                </div>
+                <div class="equipment-card fade-in">
+                    <div class="equipment-icon">🚧</div>
+                    <h3 class="equipment-name">Бульдозеры</h3>
+                    <p class="equipment-desc">Техника для планировки и расчистки территории</p>
+                    <p class="equipment-price">от 14 000 ₸/час</p>
+                </div>
+                <div class="equipment-card fade-in">
+                    <div class="equipment-icon">🛠️</div>
+                    <h3 class="equipment-name">Дорожная техника</h3>
+                    <p class="equipment-desc">Специализированные машины для дорожных работ</p>
+                    <p class="equipment-price">от 10 000 ₸/час</p>
+                </div>
+                <div class="equipment-card fade-in">
+                    <div class="equipment-icon">🏭</div>
+                    <h3 class="equipment-name">Спецтехника</h3>
+                    <p class="equipment-desc">Уникальная техника для особых задач</p>
+                    <p class="equipment-price">по запросу</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card fade-in">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Единиц техники</div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-number">1200+</div>
+                <div class="stat-label">Довольных клиентов</div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Городов Казахстана</div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Поддержка клиентов</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="feature-row">
+            <div class="feature-visual fade-in">🚀</div>
+            <div class="feature-content fade-in">
+                <h3 class="feature-title">Мгновенный поиск</h3>
+                <p class="feature-description">Интеллектуальная система поиска находит подходящую технику за секунды. Фильтры по типу, мощности, локации и цене.</p>
+                <a href="#" class="feature-link">Узнать больше →</a>
+            </div>
+        </div>
+        <div class="feature-row">
+            <div class="feature-visual fade-in">🛡️</div>
+            <div class="feature-content fade-in">
+                <h3 class="feature-title">Гарантия качества</h3>
+                <p class="feature-description">Вся техника проходит регулярное техобслуживание. Страхование и полная документация включены в стоимость.</p>
+                <a href="#" class="feature-link">Подробнее о гарантиях →</a>
+            </div>
+        </div>
+        <div class="feature-row">
+            <div class="feature-visual fade-in">📱</div>
+            <div class="feature-content fade-in">
+                <h3 class="feature-title">Управление в один клик</h3>
+                <p class="feature-description">Мобильное приложение для полного контроля: отслеживание техники, оплата, документы — всё в вашем смартфоне.</p>
+                <a href="#" class="feature-link">Скачать приложение →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-content fade-in">
+            <h2 class="cta-title">Готовы начать?</h2>
+            <p class="cta-subtitle">Присоединяйтесь к тысячам компаний, которые уже оптимизировали свои строительные процессы</p>
+            <div class="hero-buttons">
+                <button class="hero-button hero-button-primary">Начать работу</button>
+                <button class="hero-button hero-button-secondary">Связаться с нами</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Qurylys</h3>
+                <p>Инновационная платформа аренды спецтехники. Соединяем владельцев техники с теми, кому она нужна.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Техника</h4>
+                <ul>
+                    <li><a href="#">Экскаваторы</a></li>
+                    <li><a href="#">Краны</a></li>
+                    <li><a href="#">Самосвалы</a></li>
+                    <li><a href="#">Бульдозеры</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Компания</h4>
+                <ul>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Партнерам</a></li>
+                    <li><a href="#">Карьера</a></li>
+                    <li><a href="#">Блог</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Контакты</h4>
+                <ul>
+                    <li><a href="#">+7 (727) 123-45-67</a></li>
+                    <li><a href="#">info@qurylys.kz</a></li>
+                    <li><a href="#">Алматы, Казахстан</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Qurylys.kz. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 20 + 20) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Stagger animation for cards
+                    if (entry.target.classList.contains('equipment-card') || 
+                        entry.target.classList.contains('stat-card')) {
+                        const cards = entry.target.parentElement.querySelectorAll('.equipment-card, .stat-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('visible');
+                            }, index * 100);
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in, .equipment-card, .stat-card, .feature-visual, .feature-content, .section-header, .cta-content').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            const particles = document.querySelector('.particles');
+            
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - scrolled / 700;
+            }
+            
+            if (particles) {
+                particles.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Mobile menu toggle (простая версия)
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            alert('Мобильное меню в разработке');
+        });
+
+        // CTA buttons
+        document.querySelectorAll('.cta-button, .hero-button-primary').forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Функция аренды будет доступна в ближайшее время!');
+            });
+        });
+    </script>
+</body>
+</html>
